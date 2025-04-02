@@ -1,184 +1,250 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Plaster&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-        background-color: #09122c;
-        color: #f0f0f0;
-      }
-      .right {
-        font-family: Allerta Stencil;
-        font-size: 35px;
-        color: #e17564;
-        font-weight: bold;
-      }
-      .left{
-        color:#f0f0f0;
-        font-size:20px;
-      }
-      .home {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-      }
-      .rightf {
-        width: 30%;
-        height: 30%;
-        margin-top: 100px;
-      }
-      .rightf img {
-        border-radius: 10px;
-        box-shadow: 0 10px 30px rgba(255, 82, 82, 0.3);
-        transition: transform 0.3s;
-      }
-      .rightf img:hover {
-        transform: scale(1.05);
-      }
-      .leftf {
-        color: #f0f0f0;
-        width: 30%;
-        font-size: 40px;
-        margin-top: 100px;
-        text-align: center;
-        font-family: plaster;
-      }
-      nav {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        height: 100px;
-        background-color: #872341;
-      }
-      nav ul {
-        display: flex;
-        justify-content: center;
-      }
-      nav ul li {
-        list-style-type: none;
-        margin: 0 25px;
-      }
-      nav ul li a{
-        text-decoration: none;
-        color:#f0f0f0;
-      }
-      nav ul li a:hover{
-        color:#e1a4a4;
-      }
-      .color{
-        color: #E17564;
-      }
-      .about, .project, .contact {
-        padding: 80px 10%;
-        text-align: center;
-      }
-      .about h1, .project h2, .contact h2 {
-        font-size: 40px;
-        margin-bottom: 20px;
-      }
-      .about p, .project p, .contact p {
-        font-size: 18px;
-        max-width: 700px;
-        margin: auto;
-        line-height: 1.5;
-      }
-      .contact form {
-        max-width: 500px;
-        margin: auto;
-        text-align: left;
-      }
-      .contact input, .contact textarea, .contact button {
-        width: 100%;
-        margin-top: 10px;
-        padding: 10px;
-        border-radius: 5px;
-        border: none;
-      }
-      .contact button {
-        background-color: #e17564;
-        color: white;
-        font-size: 18px;
-        cursor: pointer;
-      }
-      .contact button:hover {
-        background-color: #c55a4b;
-      }
-      .footer {
-        text-align: center;
-        padding: 20px 0;
-        background-color: #112240;
-        margin-top: 150px;
-      }
-      .footer img {
-        width: 40px;
-        margin: 0 10px;
-        transition: 0.3s;
-      }
-      .footer img:hover {
-        transform: scale(1.2);
-      }
-      .foot2{
-        margin-top: 5px;
-      }
-    </style>
-  </head>
-  <body>
-    <header>
-      <nav>
-        <div class="right">Aakarshak's Portfolio</div>
-        <div class="left">
-          <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#project">Projects</a></li>
-            <li><a href="#contact">Contact me</a></li>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aakarshak Swaraj | Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-mode">
+  <!-- Loading Screen -->
+  <div class="loading-screen" id="loadingScreen">
+    <div class="loading-animation">
+      <div class="loading-text">Loading Portfolio</div>
+      <div class="loading-dot"></div>
+      <div class="loading-dot"></div>
+      <div class="loading-dot"></div>
+    </div>
+  </div>
+
+  <div class="noise"></div>
+
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h1>Aakarshak Swaraj</h1>
+      <p>Student at Vellore Institute of Technology, Chennai</p>
+      <ul class="nav">
+        <li><a href="#home" class="nav-link active">Home</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#experience" class="nav-link">Experience</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Home Section -->
+      <section id="home" class="profile-section">
+        <img src="./aki.jpg" alt="Aakarshak Swaraj" class="profile-photo" />
+        <div class="bio">
+          Highly organized and dependable candidate with a proven ability to effectively manage multiple priorities while maintaining a positive attitude. Demonstrated success in meeting team goals through a proactive approach and a willingness to take on additional responsibilities. Committed to delivering exceptional results and contributing to the overall success of the organization.
+        </div>
+      </section>
+
+      <!-- Projects Section -->
+      <section id="projects">
+        <h2>Projects</h2>
+        <div class="projects-grid">
+          <div class="project-card">
+            <h3 class="project-title">DATASET'24 Hackathon Project</h3>
+            <p class="project-description">
+              3rd Runner-up of DATASET'24, a national-level hackathon, as part of Team AlgoMind. Developed an innovative solution in 36 hours, impressing judges and securing an internship opportunity with Nokia.
+            </p>
+            <div class="tags">
+              <span class="tag">Machine Learning</span>
+              <span class="tag">Data Analytics</span>
+              <span class="tag">Hackathon</span>
+            </div>
+            <a href="#" class="view-btn">
+              View Project
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
+
+          <div class="project-card">
+            <h3 class="project-title">Computational Fluid Dynamics Simulation</h3>
+            <p class="project-description">
+              Created a sophisticated fluid dynamics simulation using Ansys Fluent. Applied principles of fluid mechanics to accurately model complex flow patterns and pressure distributions.
+            </p>
+            <div class="tags">
+              <span class="tag">CFD</span>
+              <span class="tag">Simulation</span>
+              <span class="tag">Physics</span>
+            </div>
+            <a href="#" class="view-btn">
+              View Project
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
+
+          <div class="project-card">
+            <h3 class="project-title">Game Development Club Project</h3>
+            <p class="project-description">
+              Collaborative project with the Game Development Club at VIT Chennai. Used Unity and C# to create an interactive game experience with engaging mechanics and visual effects.
+            </p>
+            <div class="tags">
+              <span class="tag">Unity</span>
+              <span class="tag">C#</span>
+              <span class="tag">Game Development</span>
+            </div>
+            <a href="#" class="view-btn">
+              View Project
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
+
+          <div class="project-card">
+            <h3 class="project-title">Personal Portfolio Website</h3>
+            <p class="project-description">
+              Designed and developed a responsive personal portfolio website using modern web technologies. Implemented smooth animations and transitions for an enhanced user experience.
+            </p>
+            <div class="tags">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">React</span>
+            </div>
+            <a href="#" class="view-btn">
+              View Project
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Experience Section -->
+      <section id="experience">
+        <h2>Professional Experience</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-role">Member</div>
+            <div class="timeline-company">Game Development Club VIT, Chennai, Tamil Nadu</div>
+            <div class="timeline-date">2024-07 - Current</div>
+            <ul class="timeline-description">
+              <li>Proven ability to learn quickly and adapt to new situations.</li>
+              <li>Skilled at working independently and collaboratively in a team environment.</li>
+              <li>Strengthened communication skills through regular interactions with others.</li>
+            </ul>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-role">Junior Engineer</div>
+            <div class="timeline-company">Team Ignition, Chennai, Tamil Nadu</div>
+            <div class="timeline-date">2024-04 - 2024-09</div>
+            <ul class="timeline-description">
+              <li>Contributed to project completion ahead of schedule through effective time management and prioritization of tasks.</li>
+              <li>Collaborated with team members to develop comprehensive project plans, ensuring successful outcomes and client satisfaction.</li>
+              <li>Supported senior engineers in the development of complex designs, contributing to the advancement of project goals.</li>
+              <li>Improved design efficiency by streamlining processes and incorporating innovative engineering solutions.</li>
+              <li>Facilitated cross-departmental collaborations, fostering a cohesive project environment.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="accomplishments">
+          <h3>Accomplishments</h3>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-role">3rd Runner-up of DATASET'24</div>
+              <div class="timeline-description">
+                <p>A national-level hackathon, as part of Team AlgoMind.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-role">Nokia Internship Opportunity</div>
+              <div class="timeline-description">
+                <p>Developed an innovative project in 36 hours, impressing judges and securing an internship opportunity with Nokia.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-role">Collaborative Problem Solving</div>
+              <div class="timeline-description">
+                <p>Worked with a dynamic team to solve complex problems, showcasing creativity, technical skills, and teamwork.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills">
+        <h2>Skills</h2>
+        <div class="projects-grid">
+          <div class="project-card">
+            <h3 class="project-title">Technical Skills</h3>
+            <div class="tags">
+              <span class="tag">Machine Learning</span>
+              <span class="tag">Logistic Regression</span>
+              <span class="tag">Linear Regression</span>
+              <span class="tag">Unity</span>
+              <span class="tag">Blender</span>
+              <span class="tag">C#</span>
+              <span class="tag">Unreal Engine</span>
+              <span class="tag">SQL</span>
+              <span class="tag">Data Structures and Algorithms</span>
+              <span class="tag">Ansys Fluent</span>
+              <span class="tag">SOLIDWORKS</span>
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">JavaScript</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <h3 class="project-title">Languages</h3>
+            <ul class="timeline-description">
+              <li>English (Bilingual or Proficient - C2)</li>
+              <li>Hindi (Bilingual or Proficient - C2)</li>
+              <li>French (Upper Intermediate - B2)</li>
+              <li>Gujarati (Intermediate - B1)</li>
+            </ul>
+          </div>
+
+          <div class="project-card">
+            <h3 class="project-title">Education</h3>
+            <ul class="timeline-description">
+              <li>Bachelor of Technology: Computer Science<br>Vellore Institute of Technology - Chennai, India<br>Expected in 2027-08</li>
+              <li>AISSCE Class 12th<br>Delhi Public School - Ranchi, India<br>Grade: 90%</li>
+              <li>AISSE Class 10th<br>Sarala Birla Public School - Ranchi, India<br>Final Grade: 94.5%</li>
+            </ul>
+          </div>
+
+          <div class="project-card">
+            <h3 class="project-title">Hobbies</h3>
+            <ul class="timeline-description">
+              <li><strong>Drawing:</strong> Enjoy creating traditional artwork, exploring different styles and techniques.</li>
+              <li><strong>Writing:</strong> Passionate about writing creative stories, blogs, and technical articles to express ideas effectively.</li>
+              <li><strong>Reading Books:</strong> Enthusiastic reader of fiction and non-fiction, with a keen interest in science, technology, and personal development.</li>
+              <li><strong>Sports & Games:</strong> Actively play soccer, cricket, badminton, chess, and swimming, enjoying both competitive and recreational play.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <h2>Contact</h2>
+        <div class="project-card">
+          <ul class="timeline-description">
+            <li><strong>Address:</strong> S/o Rajiv Kumar, Ambika Nagar Near Chanchal Baba Mandir, Motihari, Bihar 845401</li>
+            <li><strong>Phone:</strong> 8141623953</li>
+            <li><strong>Email:</strong> aakarshak.swaraj2023@vitstudent.ac.in</li>
+            <li><strong>LinkedIn:</strong> linkedin.com/in/aakarshak-swaraj-a3ba21290</li>
+            <li><strong>Portfolio:</strong> https://krishna-kilrofkansa.github.io/portfolio/</li>
           </ul>
         </div>
-      </nav>
-    </header>
-    <main>
-      <section class="home">
-        <div class="leftf">
-          Hi, I am <span class="color">Aakarshak Swaraj</span> 
-          <div>an aspiring</div><div>Web Developer</div>
-        </div>
-        <div class="rightf">
-          <img
-            src="img\first.jpg"
-            alt="Image of coder"
-            width="400px"
-            height="340px"
-          />
-        </div>
-      </section>
-      <section id="about" class="about">
-        <h1>About Me</h1>
-        <p>Hello! I’m a Computer Science Engineering student based in Bangalore, India. I am currently pursuing my B.Tech in Computer Science and Engineering from VIT University, Chennai and I will be graduating in 2025. I completed my schooling at DPS Ranchi in 2022.</p>
-        <p>I have a strong passion for software development and technology. Over the years, I have worked on various projects that have helped me enhance my skills in web development, machine learning, and data analysis. I am always eager to learn new technologies and apply them to real-world problems.</p>
-        <p>Here are a few highlights of my journey so far:
-            </p><ul>
-                <li><strong>College:</strong> VIT University, B.Tech in Computer Science and Engineering (2023-2027)</li>
-                <li><strong>School:</strong> Delhi Public School, Ranchi</li>
-                <li><strong>City:</strong> Bangalore, India</li>
-                <li><strong>Experience:</strong> Internship at Nokia, where I developed web applications and participated in AI research projects.</li>
-            </ul>
-        <p></p>
-    </section>
-      <section class="project" id="project">
-        <h2>My Projects</h2>
-        <p>Here are some of the projects I have worked on.</p>
-      </section>
-      <section class="contact" id="contact">
         <h2>Contact Me</h2>
         <form action="https://docs.google.com/forms/d/e/1FAIpQLSf1i9q8ki8OdpTXdZ7mWGD8Iu-6TgJKgXd02PS4bR9pOj4TVQ/formResponse" method="POST" target="_blank">
             <label for="name">Your Name:</label>
@@ -192,18 +258,18 @@
           
             <button type="submit">Send Message</button>
           </form>
-          
-      </section>
-      <center><p>Feel free to reach out via email or connect with me on social media!</p></center>
+      </section>        
+      
     </main>
-    <footer class="footer">
-      <div>
-        <a href="https://github.com/Krishna-Kilrofkansa"><img src="img\github.png" alt=""></a>
-        <a href="https://www.instagram.com/akrshk_0901/"><img src="img/insta.png" alt=""></a>
-        <a href="https://www.linkedin.com/in/aakarshak-swaraj/"><img src="img/linkedin.png" alt=""></a>
-        <a href="https://x.com/akrshk84/"><img src="img/twitter.jpg" alt=""></a>
-      </div>
-      <div class="foot2">&copy; 23BAI1584 Aakarshak Swaraj</div>
-    </footer>
-  </body>
+  </div>
+
+  <!-- Mode Toggle Buttons -->
+  <div class="mode-toggle">
+    <button class="toggle-btn" id="darkModeToggle">Toggle Dark/Light</button>
+    <button class="toggle-btn" id="monoModeToggle">Toggle Monospace</button>
+  </div>
+
+  <!-- Link JavaScript file -->
+  <script src="script.js"></script>
+</body>
 </html>
