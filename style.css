@@ -453,8 +453,131 @@
     padding-bottom: 30px;
     position: relative;
   }
-  
+  .cert-list {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 20px; /* Space between the heading and the list */
+}
+
+.cert-list li {
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+}
+
+.cert-list li i {
+  width: 30px;
+  text-align: center;
+  margin-right: 12px;
+  color: #007bff; /* Example color - change as needed */
+}
+
+/* Optional: Add space between the two blocks */
+.certifications-block {
+  margin-top: 40px;
+}
   /* Forms for Skills & Contact */
+  /* Removes default bullet points and padding */
+  /* Container to hold all skill categories */
+.skills-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap; /* Allows categories to wrap on small screens */
+  gap: 20px;       /* Adds space between categories */
+}
+
+/* Individual category box */
+.skill-category {
+  margin-bottom: 20px;
+}
+
+.skill-header {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: var(--accent-color);
+  transition: color 0.3s ease;
+}
+
+.skill-header:hover {
+  color: var(--primary-color);
+}
+
+.toggle-arrow {
+  font-size: 1rem;
+  transition: transform 0.3s ease;
+  margin-left: 10px;
+}
+
+.skill-content {
+  transition: all 0.3s ease;
+  max-height: 500px;
+  overflow: hidden;
+}
+
+.skill-content.collapsed {
+  max-height: 0;
+}
+
+/* This is your existing .tags style, which should still work */
+.skill-category .tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.skill-category .tag {
+  background-color: var(--tag-bg);
+  border-radius: 50px;
+  padding: 4px 12px;
+  font-size: 0.8rem;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+/* On smaller screens, make categories full-width */
+@media (max-width: 768px) {
+  .skill-category {
+    flex-basis: 100%;
+  }
+}
+.contact-links {
+  list-style: none;
+  padding-left: 0;
+}
+
+/* Styles each contact item */
+.contact-links li {
+  display: flex;         /* Aligns icon and text horizontally */
+  align-items: center;   /* Aligns them vertically in the middle */
+  margin-bottom: 15px; /* Adds spacing between items */
+  font-size: 1.1rem;     /* Adjust size as needed */
+}
+
+/* Styles the icon */
+.contact-links li i {
+  width: 30px;           /* Gives icons a fixed width for alignment */
+  margin-right: 12px;    /* Space between icon and text */
+  text-align: center;    /* Ensures icons are centered in their "box" */
+  color: #333;           /* A default icon color; change as you like */
+}
+
+/* Styles the links */
+.contact-links li a {
+  text-decoration: none;
+  color: #007bff;        /* A standard link color; change as you like */
+}
+
+/* Optional: Add a hover effect to links */
+.contact-links li a:hover {
+  text-decoration: underline;
+}
   form {
     margin-bottom: 20px;
   }

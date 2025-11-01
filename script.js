@@ -96,6 +96,23 @@ function updateContactDisplay() {
 }
 
 /**
+ * Toggles the visibility of skill category content
+ * @param {HTMLElement} header - The clicked header element
+ */
+function toggleSkillCategory(header) {
+  const content = header.nextElementSibling;
+  const arrow = header.querySelector('.toggle-arrow');
+  
+  if (content.classList.contains('collapsed')) {
+    content.classList.remove('collapsed');
+    arrow.style.transform = 'rotate(90deg)';
+  } else {
+    content.classList.add('collapsed');
+    arrow.style.transform = 'rotate(0deg)';
+  }
+}
+
+/**
  * Initialize form event listeners
  */
 function setupFormListeners() {
@@ -141,4 +158,9 @@ monoModeToggle.addEventListener("click", () => {
 document.addEventListener("DOMContentLoaded", () => {
   setupSectionObserver();
   setupFormListeners();
+  
+  // Initialize skill categories as collapsed
+  document.querySelectorAll('.skill-content').forEach(content => {
+    content.classList.add('collapsed');
+  });
 });
