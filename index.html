@@ -40,19 +40,13 @@
       <section id="home" class="profile-section">
         <img src="./aki.jpg" alt="Aakarshak Swaraj" class="profile-photo" />
         <div class="bio">
-          <p>
-          Hello! I'm Aakarshak Swaraj, a Software Engineer Intern at QCecuring Technologies and a Computer Science student at VIT, Chennai, specializing in Artificial Intelligence.
-          </p>
-          <p>
-          My passion lies in building secure, scalable backend systems and full-stack applications. In my current intern role, I'm actively developing a core user management module with microservices for a Zero-Trust security platform and engineering secure RESTful APIs for identity management. I've also built several full-stack projects using Spring Boot, Spring Security, Angular, and React.
-          </p>
-          <p>
-          Alongside my backend focus, my AI specialization  drives my interest in data-driven solutions. I've developed deep learning models for complex problems, including a project that achieved 93.4% accuracy in breast cancer detection using CNNs and ResNet50.
-          </p>
-          <p>
-          I thrive in collaborative, fast-paced environments and have a proven track record in national competitions, placing as a National Semi-Finalist at Flipkart GRID 7.0 and 3rd Runner-up at the DATASET '24 hackathon. As the ACM Club Webmaster, I also enjoy giving back by mentoring over 15 of my peers in algorithms and data structures.
-          </p>
-
+          <div class="typewriter-container">
+            <h2>Hello! I am Aakarshak Swaraj</h2>
+            <div class="typewriter-text">
+              <span id="typewriter"></span>
+              <span class="cursor">|</span>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -413,15 +407,10 @@
       <i class="fa-solid fa-location-dot"></i>
       Motihari, Bihar, India
     </li>
-    
-    <li>
-      <i class="fa-solid fa-phone"></i>
-      <a href="tel:8141623953">8141623953</a>
-    </li>
-    
+        
     <li>
       <i class="fa-solid fa-envelope"></i>
-      <a href="mailto:aakarshak.swaraj2023@vitstudent.ac.in">aakarshak.swaraj2023@vitstudent.ac.in</a>
+      <a href="mailto:aakarshak.swaraj2023@vitstudent.ac.in" target="_blank" rel="noopener noreferrer">aakarshak.swaraj2023@vitstudent.ac.in</a>
     </li>
     
     <li>
@@ -458,10 +447,27 @@
     </main>
   </div>
 
+  <!-- Scroll to Top Button -->
+  <button id="scrollToTop" class="scroll-to-top" title="Back to top">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="m18 15-6-6-6 6"/>
+    </svg>
+  </button>
+
+  <!-- Search Overlay -->
+  <div id="searchOverlay" class="search-overlay">
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Search skills, projects, experience..." />
+      <button id="closeSearch" class="close-search">×</button>
+      <div id="searchResults" class="search-results"></div>
+    </div>
+  </div>
+
   <!-- Mode Toggle Buttons -->
   <div class="mode-toggle">
     <button class="toggle-btn" id="darkModeToggle">Toggle Dark/Light</button>
     <button class="toggle-btn" id="monoModeToggle">Toggle Monospace</button>
+    <button class="toggle-btn" id="searchToggle">Search</button>
   </div>
 
   <!-- Link JavaScript file -->

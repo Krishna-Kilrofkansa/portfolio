@@ -142,6 +142,138 @@ function setupFormListeners() {
   }
 }
 
+/**
+ * Scroll to top functionality
+ */
+function setupScrollToTop() {
+  const scrollBtn = document.getElementById('scrollToTop');
+  
+  window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) {
+      scrollBtn.classList.add('visible');
+    } else {
+      scrollBtn.classList.remove('visible');
+    }
+  });
+  
+  scrollBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
+/**
+ * Search functionality
+ */
+function setupSearch() {
+  const searchOverlay = document.getElementById('searchOverlay');
+  const searchInput = document.getElementById('searchInput');
+  const searchResults = document.getElementById('searchResults');
+  const searchToggle = document.getElementById('searchToggle');
+  const closeSearch = document.getElementById('closeSearch');
+  
+  const searchData = [
+    { title: 'Python', content: 'Programming language', section: 'skills' },
+    { title: 'Machine Learning', content: 'AI/ML expertise', section: 'skills' },
+    { title: 'React.js', content: 'Frontend framework', section: 'skills' },
+    { title: 'AWS', content: 'Cloud services', section: 'skills' },
+    { title: 'Smart India Hackathon', content: 'SIH Finalist', section: 'accomplishments' },
+    { title: 'VIT Chennai', content: 'Computer Science student', section: 'about' }
+  ];
+  
+  searchToggle.addEventListener('click', () => {
+    searchOverlay.classList.add('active');
+    searchInput.focus();
+  });
+  
+  closeSearch.addEventListener('click', () => {
+    searchOverlay.classList.remove('active');
+    searchInput.value = '';
+    searchResults.innerHTML = '';
+  });
+  
+  searchOverlay.addEventListener('click', (e) => {
+    if (e.target === searchOverlay) {
+      searchOverlay.classList.remove('active');
+    }
+  });
+  
+  searchInput.addEventListener('input', (e) => {
+    const query = e.target.value.toLowerCase();
+    if (query.length < 2) {
+      searchResults.innerHTML = '';
+      return;
+    }
+    
+    const results = searchData.filter(item => 
+      item.title.toLowerCase().includes(query) || 
+      item.content.toLowerCase().includes(query)
+    );
+    
+    searchResults.innerHTML = results.map(result => `
+      <div class="search-result" onclick="navigateToSection('${result.section}')">
+        <div class="search-result-title">${result.title}</div>
+        <div class="search-result-content">${result.content}</div>
+      </div>
+    `).join('');
+  });
+}
+
+/**
+ * Navigate to section from search
+ */
+function navigateToSection(sectionId) {
+  document.getElementById('searchOverlay').classList.remove('active');
+  document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+}
+
+/**
+ * Typewriter effect for roles
+ */
+function setupTypewriter() {
+  const roles = [
+    'Software Engineer Intern',
+    'Full-Stack Developer',
+    'AI/ML Enthusiast',
+    'Computer Science Student',
+    'Problem Solver',
+    'Tech Innovator'
+  ];
+  
+  const typewriterElement = document.getElementById('typewriter');
+  if (!typewriterElement) return;
+  
+  let currentRoleIndex = 0;
+  let currentCharIndex = 0;
+  let isDeleting = false;
+  
+  function type() {
+    const currentRole = roles[currentRoleIndex];
+    
+    if (isDeleting) {
+      typewriterElement.textContent = currentRole.substring(0, currentCharIndex - 1);
+      currentCharIndex--;
+    } else {
+      typewriterElement.textContent = currentRole.substring(0, currentCharIndex + 1);
+      currentCharIndex++;
+    }
+    
+    let typeSpeed = isDeleting ? 50 : 100;
+    
+    if (!isDeleting && currentCharIndex === currentRole.length) {
+      typeSpeed = 2000;
+      isDeleting = true;
+    } else if (isDeleting && currentCharIndex === 0) {
+      isDeleting = false;
+      currentRoleIndex = (currentRoleIndex + 1) % roles.length;
+      typeSpeed = 500;
+    }
+    
+    setTimeout(type, typeSpeed);
+  }
+  
+  setTimeout(type, 4000);
+}
+
 // Event Listeners
 window.addEventListener("load", hideLoadingScreen);
 window.addEventListener("scroll", updateActiveNavLink);
@@ -158,6 +290,9 @@ monoModeToggle.addEventListener("click", () => {
 document.addEventListener("DOMContentLoaded", () => {
   setupSectionObserver();
   setupFormListeners();
+  setupScrollToTop();
+  setupSearch();
+  setupTypewriter();
   
   // Initialize skill categories as collapsed
   document.querySelectorAll('.skill-content').forEach(content => {
