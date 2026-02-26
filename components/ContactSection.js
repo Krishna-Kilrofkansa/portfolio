@@ -70,7 +70,7 @@ export default function ContactSection() {
                     <li>
                         <i className="fa-solid fa-globe"></i>
                         <a
-                            href="https://krishna-kilrofkansa.github.io/portfolio/"
+                            href="https://github.com/krishna-kilrofkansa/portfolio"
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={() => trackEventFire('portfolio_link_click')}

@@ -73,7 +73,7 @@ export default function EasterEgg() {
                                     Math.floor(Math.random() * 6)
                                 ],
                             }}
-                        ></div>
+                        />
                     ))}
                 </div>
             </div>
