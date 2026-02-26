@@ -224,6 +224,9 @@ export default function InteractiveTerminal() {
     };
 
     const handleKeyDown = (e) => {
+        // Re-dispatch to window so EasterEgg Konami Code listener still fires
+        window.dispatchEvent(new KeyboardEvent('keydown', { key: e.key, bubbles: false }));
+
         if (e.key === 'ArrowUp') {
             e.preventDefault();
             if (historyIndex < cmdHistory.length - 1) {
