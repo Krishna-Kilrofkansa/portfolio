@@ -1,7 +1,8 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import SectionWrapper from './SectionWrapper';
+import { trackEventFire } from '@/lib/telemetry';
 
 const GitHubIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -131,6 +132,38 @@ export default function ProjectsSection() {
                 behavior: 'smooth',
             });
         }
+        trackEventFire('project_scroll', { direction });
+    };
+
+    useEffect(() => {
+        const el = scrollRef.current;
+        if (!el) return;
+
+        const handleWheel = (e) => {
+            if (Math.abs(e.deltaY) < Math.abs(e.deltaX)) return;
+
+            const maxScrollLeft = el.scrollWidth - el.clientWidth;
+            const atStart = el.scrollLeft <= 0;
+            const atEnd = el.scrollLeft >= maxScrollLeft - 1;
+
+            if (e.deltaY > 0 && !atEnd) {
+                e.preventDefault();
+                el.scrollLeft += e.deltaY;
+            } else if (e.deltaY < 0 && !atStart) {
+                e.preventDefault();
+                el.scrollLeft += e.deltaY;
+            }
+        };
+
+        el.addEventListener('wheel', handleWheel, { passive: false });
+        return () => el.removeEventListener('wheel', handleWheel);
+    }, []);
+
+    const handleProjectClick = (project, linkType) => {
+        trackEventFire('project_click', {
+            project_title: project.title,
+            link_type: linkType,
+        });
     };
 
     return (
@@ -162,17 +195,34 @@ export default function ProjectsSection() {
                         </div>
                         <div className="project-links">
                             {project.github && (
-                                <a href={project.github} className="view-btn" target="_blank" rel="noopener noreferrer">
+                                <a
+                                    href={project.github}
+                                    className="view-btn"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={() => handleProjectClick(project, 'github')}
+                                >
                                     GitHub <GitHubIcon />
                                 </a>
                             )}
                             {project.live && (
-                                <a href={project.live} className="view-btn view-btn-live" target="_blank" rel="noopener noreferrer">
+                                <a
+                                    href={project.live}
+                                    className="view-btn view-btn-live"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={() => handleProjectClick(project, 'live_demo')}
+                                >
                                     Live Demo <ArrowIcon />
                                 </a>
                             )}
                             {project.apk && (
-                                <a href={project.apk} className="view-btn view-btn-apk" download>
+                                <a
+                                    href={project.apk}
+                                    className="view-btn view-btn-apk"
+                                    download
+                                    onClick={() => handleProjectClick(project, 'apk_download')}
+                                >
                                     <i className="fa-brands fa-android" style={{ marginRight: '6px' }}></i>
                                     APK
                                 </a>

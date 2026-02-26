@@ -13,6 +13,10 @@ import ContactSection from '@/components/ContactSection';
 import ScrollToTop from '@/components/ScrollToTop';
 import SearchOverlay from '@/components/SearchOverlay';
 import ModeToggle from '@/components/ModeToggle';
+import InteractiveTerminal from '@/components/InteractiveTerminal';
+import EasterEgg from '@/components/EasterEgg';
+import ScrollProgress from '@/components/ScrollProgress';
+import Footer from '@/components/Footer';
 
 export default function Home() {
     const [isDarkMode, setIsDarkMode] = useState(true);
@@ -36,6 +40,8 @@ export default function Home() {
     return (
         <>
             <LoadingScreen isLoading={isLoading} />
+            <ScrollProgress />
+            <EasterEgg />
             <div className="noise"></div>
 
             {/* Animated background orbs */}
@@ -53,8 +59,10 @@ export default function Home() {
                     <SkillsSection />
                     <ResumeSection />
                     <ContactSection />
+                    <Footer />
                 </main>
             </div>
+            <InteractiveTerminal />
             <ScrollToTop />
             <SearchOverlay isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
             <ModeToggle
