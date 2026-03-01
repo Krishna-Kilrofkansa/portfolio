@@ -44,7 +44,7 @@ const projects = [
             'Full-Stack Task Manager Dashboard with enterprise-grade audit log, secure CRUD operations, and multi-tenant support built with Spring Boot and Angular.',
         tags: ['Spring Boot', 'Angular', 'Java', 'MongoDB', 'Spring Security'],
         github: 'https://github.com/krishna-kilrofkansa/task-manager-assessment',
-        live: null,
+        live: 'public/a1.ipynb',
         type: 'Full-Stack',
         icon: '✅',
     },
