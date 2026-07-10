@@ -16,14 +16,14 @@ export default function ResumeSection() {
                     <i className="fa-solid fa-file-pdf" style={{ fontSize: '2.5rem', marginBottom: '12px', display: 'block', color: 'var(--primary-color)' }}></i>
                     Download my latest resume to learn more about my experience and skills.
                 </p>
-                <a href="/Aakarshak-resume.pdf" className="view-btn" download onClick={handleDownload}>
+                <a href="/Aakarshak aiml.pdf" className="view-btn" download onClick={handleDownload}>
                     Download Resume
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M12 5v14"></path>
                         <path d="m19 12-7 7-7-7"></path>
                     </svg>
                 </a>
-                
+
             </div>
         </SectionWrapper>
     );
