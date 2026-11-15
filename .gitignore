@@ -1,24 +1,55 @@
-# dependencies
+# Dependencies
 node_modules/
 /.pnp
 .pnp.js
 
-# next.js
+# Next.js build output
 /.next/
 /out/
-
-# production
 /build
 
-# misc
-.DS_Store
+# AI Agents, Tools & Skills
+.agents/
+.gemini/
+.claude/
+skills/
+design-system/
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+venv/
+.venv/
+env/
+
+# Scratch & Debug Scripts
+scripts/inspect_*.js
+scripts/test_*.js
+scratch/
+
+# Environment & Credentials
+.env*.local
+.env
 *.pem
 
-# debug
+# Logs & Debug
+*.log
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
-# env
-.env*.local
+# OS & Editor Metadata
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
 
-# vercel
+# Vercel
 .vercel
