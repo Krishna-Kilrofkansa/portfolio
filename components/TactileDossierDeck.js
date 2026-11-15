@@ -41,9 +41,30 @@ export default function TactileDossierDeck() {
                     style={{ top: 'calc(80px + 0 * 26px)', zIndex: 10 }}
                 >
                     <div className="dossier-tab-header">
-                        <span className="tab-badge font-mono">CH.01 // CURIOSITY</span>
-                        <span className="tab-title">FIFA 2026 Probabilistic Forecasting Engine</span>
-                        <span className="tab-stamp font-mono">[20k MONTE CARLO • ZERO LEAKAGE]</span>
+                        <div className="tab-header-left">
+                            <span className="tab-badge font-mono">CH.01 // CURIOSITY</span>
+                            <span className="tab-title">FIFA 2026 Probabilistic Forecasting Engine</span>
+                            <span className="tab-stamp font-mono hide-on-mobile">[20k MONTE CARLO • ZERO LEAKAGE]</span>
+                        </div>
+                        <div className="tab-header-right">
+                            <button
+                                type="button"
+                                onClick={() => openDeepDive('fifa_worldcup')}
+                                className="tab-inspect-btn font-mono"
+                                aria-label="Inspect FIFA 2026 Architecture"
+                            >
+                                <span className="dd-pulse-dot" />
+                                <span>INSPECT ARCHITECTURE ➔</span>
+                            </button>
+                            <a
+                                href="https://github.com/Krishna-Kilrofkansa/World-Cup-Predictor"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="tab-gh-link font-mono hide-on-mobile"
+                            >
+                                GITHUB ↗
+                            </a>
+                        </div>
                     </div>
 
                     <div className="dossier-body">
@@ -64,11 +85,31 @@ export default function TactileDossierDeck() {
                                 {/* Plain-English Explanation */}
                                 <div className="section-narrative">
                                     <h4 className="narrative-h font-mono chromatic-subtle">
-                                        01. THE HUMAN STORY (IN PLAIN ENGLISH)
+                                        01. THE INSPIRATION
                                     </h4>
                                     <p>
                                         I love football, and with the 2026 World Cup expanding to a 48-team format (with 495 messy tie-breaker combinations for 3rd-place teams), traditional brackets broke down completely. Instead of listening to talking heads on TV, I built a simulation that plays out the entire World Cup <strong>20,000 times in 4.5 seconds</strong>—accounting for goal margins, player form, and real match fatigue to give honest, calibrated win probabilities.
                                     </p>
+
+                                    <div className="actions-row">
+                                        <button
+                                            type="button"
+                                            onClick={() => openDeepDive('fifa_worldcup')}
+                                            className="deepdive-trigger-btn font-mono"
+                                        >
+                                            <span className="dd-pulse-dot" />
+                                            <span className="chromatic-bold">INSPECT ARCHITECTURE GRAPH & DEEP DIVE</span>
+                                            <span className="dd-arrow">➔</span>
+                                        </button>
+                                        <a
+                                            href="https://github.com/Krishna-Kilrofkansa/World-Cup-Predictor"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="retro-action-btn font-mono"
+                                        >
+                                            <span>GITHUB REPO ↗</span>
+                                        </a>
+                                    </div>
                                 </div>
 
                                 <div className="section-narrative">
@@ -95,26 +136,6 @@ export default function TactileDossierDeck() {
                                             <span>Froze all player and team attributes strictly at timestamp <code>t-1</code> before kickoff, and optimized for Platt calibration over raw accuracy.</span>
                                         </div>
                                     </div>
-                                </div>
-
-                                <div className="actions-row">
-                                    <button
-                                        type="button"
-                                        onClick={() => openDeepDive('fifa_worldcup')}
-                                        className="deepdive-trigger-btn font-mono"
-                                    >
-                                        <span className="dd-pulse-dot" />
-                                        <span className="chromatic-bold">INSPECT ARCHITECTURE GRAPH & DEEP DIVE</span>
-                                        <span className="dd-arrow">➔</span>
-                                    </button>
-                                    <a
-                                        href="https://github.com/Krishna-Kilrofkansa/World-Cup-Predictor"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="retro-action-btn font-mono"
-                                    >
-                                        <span>GITHUB REPO ↗</span>
-                                    </a>
                                 </div>
                             </div>
 
@@ -167,9 +188,22 @@ export default function TactileDossierDeck() {
                     style={{ top: 'calc(80px + 1 * 26px)', zIndex: 11 }}
                 >
                     <div className="dossier-tab-header">
-                        <span className="tab-badge font-mono">CH.02 // INITIATIVE</span>
-                        <span className="tab-title">The Two-Stage Placement Outreach Automation</span>
-                        <span className="tab-stamp font-mono">[RFC-822 QUEUE • HUMAN-FIRST PROTOCOL]</span>
+                        <div className="tab-header-left">
+                            <span className="tab-badge font-mono">CH.02 // INITIATIVE</span>
+                            <span className="tab-title">The Two-Stage Placement Outreach Automation</span>
+                            <span className="tab-stamp font-mono hide-on-mobile">[RFC-822 QUEUE • HUMAN-FIRST PROTOCOL]</span>
+                        </div>
+                        <div className="tab-header-right">
+                            <button
+                                type="button"
+                                onClick={() => openDeepDive('outreach_automation')}
+                                className="tab-inspect-btn font-mono"
+                                aria-label="Inspect Outreach Automation Architecture"
+                            >
+                                <span className="dd-pulse-dot" />
+                                <span>INSPECT ARCHITECTURE ➔</span>
+                            </button>
+                        </div>
                     </div>
 
                     <div className="dossier-body">
@@ -191,11 +225,23 @@ export default function TactileDossierDeck() {
 
                                 <div className="section-narrative">
                                     <h4 className="narrative-h font-mono chromatic-subtle">
-                                        01. THE HUMAN STORY (IN PLAIN ENGLISH)
+                                        01. THE INSPIRATION
                                     </h4>
                                     <p>
                                         During college placement season, I was spending 4 hours every single day writing the exact same email to 50 founders, customizing each one by hand, attaching my resume, and updating spreadsheets. I got tired of the manual repetition, so I built a tool to automate it. But when Google flagged me as a spam bot, I had to completely redesign it into a genuine, polite two-stage human conversation.
                                     </p>
+
+                                    <div className="actions-row">
+                                        <button
+                                            type="button"
+                                            onClick={() => openDeepDive('outreach_automation')}
+                                            className="deepdive-trigger-btn font-mono"
+                                        >
+                                            <span className="dd-pulse-dot" />
+                                            <span className="chromatic-bold">INSPECT ARCHITECTURE GRAPH & DEEP DIVE</span>
+                                            <span className="dd-arrow">➔</span>
+                                        </button>
+                                    </div>
                                 </div>
 
                                 <div className="post-mortem-box">
@@ -206,18 +252,6 @@ export default function TactileDossierDeck() {
                                     <p className="pm-desc">
                                         Cold emails with PDF attachments get blocked by corporate mail filters. I redesigned the tool to send a short, polite 3-sentence note first with <strong>zero attachments</strong>. Only when a human replies with interest does the tool automatically follow up with the resume.
                                     </p>
-                                </div>
-
-                                <div className="actions-row">
-                                    <button
-                                        type="button"
-                                        onClick={() => openDeepDive('outreach_automation')}
-                                        className="deepdive-trigger-btn font-mono"
-                                    >
-                                        <span className="dd-pulse-dot" />
-                                        <span className="chromatic-bold">INSPECT ARCHITECTURE GRAPH & DEEP DIVE</span>
-                                        <span className="dd-arrow">➔</span>
-                                    </button>
                                 </div>
                             </div>
 
@@ -268,9 +302,22 @@ export default function TactileDossierDeck() {
                     style={{ top: 'calc(80px + 2 * 26px)', zIndex: 12 }}
                 >
                     <div className="dossier-tab-header">
-                        <span className="tab-badge font-mono">CH.03 // TAKING A BIGGER SWING</span>
-                        <span className="tab-title">Hollow Knight King&apos;s Pass Reinforcement Learning Agent</span>
-                        <span className="tab-stamp font-mono">[DIRECT RAM HOOK • ZERO FRAME LAG]</span>
+                        <div className="tab-header-left">
+                            <span className="tab-badge font-mono">CH.03 // TAKING A BIGGER SWING</span>
+                            <span className="tab-title">Hollow Knight King&apos;s Pass Reinforcement Learning Agent</span>
+                            <span className="tab-stamp font-mono hide-on-mobile">[DIRECT RAM HOOK • ZERO FRAME LAG]</span>
+                        </div>
+                        <div className="tab-header-right">
+                            <button
+                                type="button"
+                                onClick={() => openDeepDive('hollow_knight')}
+                                className="tab-inspect-btn font-mono"
+                                aria-label="Inspect Hollow Knight Architecture"
+                            >
+                                <span className="dd-pulse-dot" />
+                                <span>INSPECT ARCHITECTURE ➔</span>
+                            </button>
+                        </div>
                     </div>
 
                     <div className="dossier-body">
@@ -292,11 +339,23 @@ export default function TactileDossierDeck() {
 
                                 <div className="section-narrative">
                                     <h4 className="narrative-h font-mono chromatic-subtle">
-                                        01. THE HUMAN STORY (IN PLAIN ENGLISH)
+                                        01. THE INSPIRATION
                                     </h4>
                                     <p>
                                         When teaching computers to play video games, most developers record the screen with video capture and feed images into deep neural networks. But video capture lags behind by two frames and uses tons of computer power. In Hollow Knight, a split-second lag means falling onto spikes. I hacked directly into the game&apos;s internal Unity engine with a custom C# mod, reading coordinates straight from computer memory at the speed of RAM—letting the AI learn King&apos;s Pass with <strong>zero frame latency</strong>.
                                     </p>
+
+                                    <div className="actions-row">
+                                        <button
+                                            type="button"
+                                            onClick={() => openDeepDive('hollow_knight')}
+                                            className="deepdive-trigger-btn font-mono"
+                                        >
+                                            <span className="dd-pulse-dot" />
+                                            <span className="chromatic-bold">INSPECT ARCHITECTURE GRAPH & DEEP DIVE</span>
+                                            <span className="dd-arrow">➔</span>
+                                        </button>
+                                    </div>
                                 </div>
 
                                 <div className="post-mortem-box">
@@ -307,18 +366,6 @@ export default function TactileDossierDeck() {
                                     <p className="pm-desc">
                                         <strong>No.</strong> The agent does <strong>not</strong> use a camera. The C# mod queries game memory to feed Python a <strong>23-dimensional tactical radar vector</strong>: relative distance to hazards, danger flags, and enemy health.
                                     </p>
-                                </div>
-
-                                <div className="actions-row">
-                                    <button
-                                        type="button"
-                                        onClick={() => openDeepDive('hollow_knight')}
-                                        className="deepdive-trigger-btn font-mono"
-                                    >
-                                        <span className="dd-pulse-dot" />
-                                        <span className="chromatic-bold">INSPECT ARCHITECTURE GRAPH & DEEP DIVE</span>
-                                        <span className="dd-arrow">➔</span>
-                                    </button>
                                 </div>
                             </div>
 

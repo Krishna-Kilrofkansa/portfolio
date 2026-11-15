@@ -6,9 +6,11 @@ import { useState } from 'react';
  * VisualArchitectureGraph
  * Renders an interactive, graph-based visual architecture diagram with SVG node connections,
  * glowing data pulses, status indicators, and detail inspection cards.
+ * Follows strict dark-obsidian and warm amber palette rules (no rainbow color schemes).
  */
 export default function VisualArchitectureGraph({ stages = [], title = 'System Architecture Pipeline' }) {
-    const [selectedNode, setSelectedNode] = useState(null);
+    // Default to first stage selected so inspection details are immediately visible
+    const [selectedNode, setSelectedNode] = useState(stages && stages.length > 0 ? stages[0] : null);
 
     if (!stages || stages.length === 0) return null;
 
@@ -18,7 +20,7 @@ export default function VisualArchitectureGraph({ stages = [], title = 'System A
                 <div className="arch-title-row">
                     <span className="arch-dot" />
                     <span className="arch-title-text chromatic-bold">{title}</span>
-                    <span className="arch-legend font-mono">[CLICK ANY NODE TO INSPECT SPECS]</span>
+                    <span className="arch-legend font-mono">[CLICK ANY NODE TO INSPECT SPECS & CONTRACTS]</span>
                 </div>
             </div>
 
@@ -30,7 +32,8 @@ export default function VisualArchitectureGraph({ stages = [], title = 'System A
                         return (
                             <div key={stage.id || idx} className="arch-stage-column">
                                 <div className="stage-step-tag font-mono">
-                                    STEP 0{idx + 1} // {stage.role}
+                                    <span className="step-num-badge">0{idx + 1}</span>
+                                    <span className="step-role-text">{stage.role}</span>
                                 </div>
 
                                 <div
@@ -43,13 +46,14 @@ export default function VisualArchitectureGraph({ stages = [], title = 'System A
                                             setSelectedNode(stage);
                                         }
                                     }}
+                                    aria-label={`Inspect ${stage.name}`}
                                 >
                                     <div className="node-badge-row font-mono">
-                                        <span className={`node-type-pill ${stage.type?.toLowerCase() || 'default'}`}>
+                                        <span className="node-type-pill">
                                             {stage.type || 'MODULE'}
                                         </span>
                                         {stage.metric && (
-                                            <span className="node-metric-pill">{stage.metric}</span>
+                                            <span className="node-metric-pill font-mono">{stage.metric}</span>
                                         )}
                                     </div>
 
@@ -58,6 +62,9 @@ export default function VisualArchitectureGraph({ stages = [], title = 'System A
 
                                     <div className="node-footer font-mono">
                                         <span className="tech-stack-tag">{stage.tech}</span>
+                                        <span className="node-inspect-cta">
+                                            {isSelected ? 'ACTIVE ●' : 'INSPECT ➔'}
+                                        </span>
                                     </div>
 
                                     {/* Connection Arrow (if not last) */}
@@ -79,33 +86,43 @@ export default function VisualArchitectureGraph({ stages = [], title = 'System A
             {selectedNode && (
                 <div className="arch-node-inspector animate-fadeIn">
                     <div className="inspector-header font-mono">
-                        <span className="insp-label chromatic-text">
-                            [INSPECTING: {selectedNode.name}]
-                        </span>
+                        <div className="insp-header-left">
+                            <span className="insp-badge">SPECIFICATION DRAWER</span>
+                            <span className="insp-title chromatic-bold">
+                                [INSPECTING: {selectedNode.name}]
+                            </span>
+                        </div>
                         <button
                             type="button"
-                            className="insp-close-btn"
+                            className="insp-close-btn font-mono"
                             onClick={() => setSelectedNode(null)}
+                            aria-label="Close inspector drawer"
                         >
-                            ✕ CLOSE
+                            [ ✕ CLOSE ]
                         </button>
                     </div>
 
                     <div className="inspector-grid">
                         <div className="insp-col">
-                            <span className="insp-label font-mono">WHAT IT DOES (PLAIN ENGLISH):</span>
+                            <span className="insp-label font-mono">01 // WHAT IT DOES (PLAIN ENGLISH):</span>
                             <p className="insp-text">{selectedNode.plainDescription}</p>
                         </div>
                         <div className="insp-col">
-                            <span className="insp-label font-mono">LOW-LEVEL IMPLEMENTATION:</span>
+                            <span className="insp-label font-mono">02 // LOW-LEVEL IMPLEMENTATION:</span>
                             <p className="insp-text font-mono text-xs">{selectedNode.technicalDetail}</p>
                         </div>
                         {selectedNode.inputOutput && (
-                            <div className="insp-col">
-                                <span className="insp-label font-mono">DATA CONTRACT (IN / OUT):</span>
+                            <div className="insp-col span-full">
+                                <span className="insp-label font-mono">03 // VERIFIED DATA CONTRACT (IN / OUT):</span>
                                 <div className="io-contract font-mono text-xs">
-                                    <div><strong>IN:</strong> {selectedNode.inputOutput.in}</div>
-                                    <div><strong>OUT:</strong> {selectedNode.inputOutput.out}</div>
+                                    <div className="io-row">
+                                        <span className="io-badge in">IN</span>
+                                        <span className="io-val">{selectedNode.inputOutput.in}</span>
+                                    </div>
+                                    <div className="io-row">
+                                        <span className="io-badge out">OUT</span>
+                                        <span className="io-val">{selectedNode.inputOutput.out}</span>
+                                    </div>
                                 </div>
                             </div>
                         )}
