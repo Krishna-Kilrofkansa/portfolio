@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const KONAMI_CODE = [
     'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
@@ -10,7 +11,6 @@ const KONAMI_CODE = [
 
 export default function EasterEgg() {
     const [triggered, setTriggered] = useState(false);
-    const [progress, setProgress] = useState(0);
 
     useEffect(() => {
         let inputSequence = [];
@@ -18,19 +18,7 @@ export default function EasterEgg() {
         const handleKeyDown = (e) => {
             inputSequence.push(e.key.length === 1 ? e.key.toLowerCase() : e.key);
 
-            // Check if the latest inputs match the Konami code
             const slice = inputSequence.slice(-KONAMI_CODE.length);
-
-            // Update progress indicator
-            let matchCount = 0;
-            for (let i = 0; i < slice.length && i < KONAMI_CODE.length; i++) {
-                if (slice[i] === KONAMI_CODE[i]) matchCount++;
-                else break;
-            }
-
-            if (slice.length <= KONAMI_CODE.length) {
-                setProgress(matchCount / KONAMI_CODE.length);
-            }
 
             if (
                 slice.length === KONAMI_CODE.length &&
@@ -41,7 +29,6 @@ export default function EasterEgg() {
                 setTimeout(() => setTriggered(false), 4000);
             }
 
-            // Keep only last 20 inputs
             if (inputSequence.length > 20) {
                 inputSequence = inputSequence.slice(-20);
             }
@@ -51,32 +38,77 @@ export default function EasterEgg() {
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, []);
 
-    if (!triggered) return null;
-
     return (
-        <div className="easter-egg-overlay">
-            <div className="easter-egg-content">
-                <div className="easter-egg-emoji">🎮</div>
-                <h2 className="easter-egg-title">Achievement Unlocked!</h2>
-                <p className="easter-egg-text">You found the Konami Code Easter Egg!</p>
-                <p className="easter-egg-subtext">↑↑↓↓←→←→BA</p>
-                <div className="confetti-container">
-                    {Array.from({ length: 30 }).map((_, i) => (
-                        <div
-                            key={i}
-                            className="confetti"
-                            style={{
-                                left: `${Math.random() * 100}%`,
-                                animationDelay: `${Math.random() * 2}s`,
-                                animationDuration: `${2 + Math.random() * 2}s`,
-                                backgroundColor: ['#10b981', '#3ddc84', '#f59e0b', '#ef4444', '#6366f1', '#ec4899'][
-                                    Math.floor(Math.random() * 6)
-                                ],
-                            }}
-                        />
-                    ))}
-                </div>
-            </div>
-        </div>
+        <AnimatePresence>
+            {triggered && (
+                <motion.div
+                    className="easter-egg-overlay"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.4 }}
+                >
+                    <div className="easter-egg-content">
+                        <motion.div
+                            className="easter-egg-emoji"
+                            initial={{ scale: 0, rotate: -20 }}
+                            animate={{ scale: 1, rotate: 0 }}
+                            transition={{ type: 'spring', damping: 10, stiffness: 200 }}
+                        >
+                            🎮
+                        </motion.div>
+                        <motion.h2
+                            className="easter-egg-title"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.2, duration: 0.5 }}
+                        >
+                            Achievement Unlocked!
+                        </motion.h2>
+                        <motion.p
+                            className="easter-egg-text"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.4 }}
+                        >
+                            You found the Konami Code Easter Egg!
+                        </motion.p>
+                        <motion.p
+                            className="easter-egg-subtext"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.5 }}
+                        >
+                            ↑↑↓↓←→←→BA
+                        </motion.p>
+                        <div className="confetti-container">
+                            {Array.from({ length: 30 }).map((_, i) => (
+                                <motion.div
+                                    key={i}
+                                    className="confetti"
+                                    style={{
+                                        left: `${Math.random() * 100}%`,
+                                        backgroundColor: ['#22C55E', '#6366F1', '#F59E0B', '#EF4444', '#EC4899', '#38BDF8'][
+                                            Math.floor(Math.random() * 6)
+                                        ],
+                                    }}
+                                    initial={{ y: -10, rotate: 0, opacity: 1 }}
+                                    animate={{
+                                        y: typeof window !== 'undefined' ? window.innerHeight : 800,
+                                        rotate: 720,
+                                        opacity: 0,
+                                    }}
+                                    transition={{
+                                        duration: 2 + Math.random() * 2,
+                                        delay: Math.random() * 1.5,
+                                        ease: 'linear',
+                                    }}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                </motion.div>
+            )}
+        </AnimatePresence>
     );
 }

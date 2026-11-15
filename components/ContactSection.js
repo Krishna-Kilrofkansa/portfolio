@@ -1,11 +1,21 @@
 'use client';
 
 import { useState } from 'react';
-import SectionWrapper from './SectionWrapper';
+import { motion, AnimatePresence } from 'framer-motion';
 import { trackEventFire } from '@/lib/telemetry';
 
 export default function ContactSection() {
     const [status, setStatus] = useState('');
+    const [copiedEmail, setCopiedEmail] = useState(false);
+
+    const email = 'aakarshak.work@gmail.com';
+
+    const handleCopyEmail = () => {
+        navigator.clipboard.writeText(email);
+        setCopiedEmail(true);
+        trackEventFire('email_copied');
+        setTimeout(() => setCopiedEmail(false), 2500);
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -37,93 +47,165 @@ export default function ContactSection() {
     };
 
     return (
-        <SectionWrapper id="contact">
-            <h2>Contact</h2>
-            <div className="project-card">
-                <ul className="contact-links">
-                    <li>
-                        <i className="fa-solid fa-location-dot"></i>
-                        <span>Motihari, Bihar, India</span>
-                    </li>
-                    <li>
-                        <i className="fa-solid fa-envelope"></i>
-                        <a
-                            href="mailto:aakarshak.swaraj2023@vitstudent.ac.in"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={() => trackEventFire('email_click')}
-                        >
-                            aakarshak.swaraj2023@vitstudent.ac.in
-                        </a>
-                    </li>
-                    <li>
-                        <i className="fa-brands fa-linkedin"></i>
-                        <a
-                            href="https://linkedin.com/in/aakarshak-swaraj-a3ba21290"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={() => trackEventFire('linkedin_click')}
-                        >
-                            linkedin.com/in/aakarshak-swaraj
-                        </a>
-                    </li>
-                    <li>
-                        <i className="fa-solid fa-globe"></i>
-                        <a
-                            href="https://github.com/krishna-kilrofkansa/portfolio"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={() => trackEventFire('portfolio_link_click')}
-                        >
-                            Personal Portfolio
-                        </a>
-                    </li>
-                </ul>
+        <section className="contact-vault-section" id="contact">
+            <div className="section-film-badge font-mono">
+                <span className="badge-film">CHAPTER 06 // DIRECT DISPATCH</span>
+                <span className="badge-film">CONTACT & VERIFIED COORDINATES</span>
+                <span className="badge-film">OPEN FOR ROLES</span>
             </div>
 
-            <h2 style={{ marginTop: '40px' }}>Send a Message</h2>
-            <form onSubmit={handleSubmit}>
-                <input type="hidden" name="subject" value="New message from Portfolio" />
-
-                <label htmlFor="name">
-                    <i className="fa-solid fa-user" style={{ marginRight: '8px', color: 'var(--primary-color)' }}></i>
-                    Your Name
-                </label>
-                <input type="text" name="name" id="name" placeholder="John Doe" required />
-
-                <label htmlFor="email">
-                    <i className="fa-solid fa-at" style={{ marginRight: '8px', color: 'var(--primary-color)' }}></i>
-                    Your Email
-                </label>
-                <input type="email" name="email" id="email" placeholder="john@example.com" required />
-
-                <label htmlFor="message">
-                    <i className="fa-solid fa-message" style={{ marginRight: '8px', color: 'var(--primary-color)' }}></i>
-                    Write Message
-                </label>
-                <textarea name="message" id="message" rows="4" placeholder="Hi Aakarshak, I'd like to..." required></textarea>
-
-                <button type="submit" disabled={status === 'sending'}>
-                    {status === 'sending' ? (
-                        <><i className="fa-solid fa-spinner fa-spin" style={{ marginRight: '8px' }}></i>Sending...</>
-                    ) : (
-                        <><i className="fa-solid fa-paper-plane" style={{ marginRight: '8px' }}></i>Send Message</>
-                    )}
-                </button>
-
-                {status === 'success' && (
-                    <p style={{ marginTop: '16px', color: 'var(--highlight-color)', fontWeight: 600, fontSize: '0.95rem' }}>
-                        <i className="fa-solid fa-check-circle" style={{ marginRight: '6px' }}></i>
-                        Message sent successfully! I&apos;ll get back to you soon.
+            <div className="contact-dual-layout">
+                {/* Left Card: Direct Coordinates & 1-Click Copy */}
+                <div className="contact-info-card">
+                    <span className="contact-tag font-mono chromatic-text">[DIRECT DISPATCH]</span>
+                    <h2 className="contact-heading chromatic-bold">Let&apos;s Build Systems Together</h2>
+                    <p className="contact-sub font-mono">
+                        Available for software engineering, systems, and AI/ML roles. Grounded in real telemetry, clean architectures, and honest post-mortems.
                     </p>
-                )}
-                {status === 'error' && (
-                    <p style={{ marginTop: '16px', color: '#f7768e', fontWeight: 600, fontSize: '0.95rem' }}>
-                        <i className="fa-solid fa-circle-xmark" style={{ marginRight: '6px' }}></i>
-                        Something went wrong. Please try again.
-                    </p>
-                )}
-            </form>
-        </SectionWrapper>
+
+                    <div className="contact-channels font-mono">
+                        {/* 1-Click Copy Email */}
+                        <div className="channel-box highlight-channel">
+                            <div className="channel-meta">
+                                <span className="channel-lbl">PRIMARY INBOX</span>
+                                <span className="channel-val">{email}</span>
+                            </div>
+                            <button
+                                type="button"
+                                onClick={handleCopyEmail}
+                                className="copy-channel-btn"
+                            >
+                                {copiedEmail ? '✓ COPIED TO CLIPBOARD' : '⧉ 1-CLICK COPY'}
+                            </button>
+                        </div>
+
+                        {/* GitHub */}
+                        <a
+                            href="https://github.com/Krishna-Kilrofkansa"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="channel-link-box"
+                        >
+                            <span className="channel-lbl">GITHUB CODEBASE</span>
+                            <span className="channel-action">github.com/Krishna-Kilrofkansa ↗</span>
+                        </a>
+
+                        {/* LinkedIn */}
+                        <a
+                            href="https://www.linkedin.com/in/aakarshak-swaraj-a3ba21290"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="channel-link-box"
+                        >
+                            <span className="channel-lbl">LINKEDIN NETWORK</span>
+                            <span className="channel-action">linkedin.com/in/aakarshak-swaraj ↗</span>
+                        </a>
+
+                        {/* LeetCode */}
+                        <a
+                            href="https://leetcode.com/u/Aakarshak_Swaraj"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="channel-link-box"
+                        >
+                            <span className="channel-lbl">LEETCODE CONTEST PROFILE</span>
+                            <span className="channel-action">300+ Problems • Rating: 1508 ↗</span>
+                        </a>
+
+                        {/* Instagram */}
+                        <a
+                            href="https://www.instagram.com/akrshk.void/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="channel-link-box"
+                        >
+                            <span className="channel-lbl">INSTAGRAM</span>
+                            <span className="channel-action">instagram.com/akrshk.void ↗</span>
+                        </a>
+
+                        {/* Coordinates */}
+                        <div className="channel-box coordinates-box">
+                            <span className="channel-lbl">CURRENT COORDINATES</span>
+                            <span className="channel-val chromatic-subtle">
+                                Chennai (VIT Campus) ➔ Transitioning to Bengaluru, India
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Right Card: Direct Fast Dispatch Form */}
+                <div className="contact-form-card">
+                    <div className="form-header font-mono">
+                        <span>QUICK ENCRYPTED DISPATCH // Web3Forms</span>
+                    </div>
+
+                    <form onSubmit={handleSubmit} className="retro-contact-form font-mono">
+                        <div className="form-group">
+                            <label htmlFor="contact-name">SENDER_NAME:</label>
+                            <input
+                                id="contact-name"
+                                type="text"
+                                name="name"
+                                placeholder="Your Name / Team"
+                                required
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="contact-email">RETURN_EMAIL:</label>
+                            <input
+                                id="contact-email"
+                                type="email"
+                                name="email"
+                                placeholder="name@company.com"
+                                required
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="contact-message">DISPATCH_PAYLOAD:</label>
+                            <textarea
+                                id="contact-message"
+                                name="message"
+                                rows={4}
+                                placeholder="Discuss a project, opening, or technical deep dive..."
+                                required
+                            />
+                        </div>
+
+                        <button
+                            type="submit"
+                            disabled={status === 'sending'}
+                            className="form-submit-btn font-mono"
+                        >
+                            {status === 'sending' ? 'TRANSMITTING PACKET...' : 'DISPATCH MESSAGE ➔'}
+                        </button>
+
+                        <AnimatePresence>
+                            {status === 'success' && (
+                                <motion.div
+                                    className="dispatch-alert success font-mono"
+                                    initial={{ opacity: 0, y: 5 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0 }}
+                                >
+                                    ✓ PACKET DELIVERED. I WILL REPLY WITHIN 24 HOURS.
+                                </motion.div>
+                            )}
+                            {status === 'error' && (
+                                <motion.div
+                                    className="dispatch-alert error font-mono"
+                                    initial={{ opacity: 0, y: 5 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0 }}
+                                >
+                                    ⚠ TRANSMISSION FAILED. PLEASE EMAIL DIRECTLY: aakarshak.work@gmail.com
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </form>
+                </div>
+            </div>
+        </section>
     );
 }

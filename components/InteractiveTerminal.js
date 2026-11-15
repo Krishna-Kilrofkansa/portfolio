@@ -1,6 +1,13 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+
+const TerminalIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="4 17 10 11 4 5" /><line x1="12" x2="20" y1="19" y2="19" />
+    </svg>
+);
 
 const COMMANDS = {
     help: {
@@ -26,7 +33,7 @@ const COMMANDS = {
     },
     about: {
         output: [
-            "Hi! I'm Aakarshak Swaraj 👋",
+            "Hi! I'm Aakarshak Swaraj",
             '',
             'CS student at VIT Chennai, passionate about building',
             'software that solves real problems.',
@@ -40,56 +47,52 @@ const COMMANDS = {
     },
     projects: {
         output: [
-            '📂 Navigating to projects...',
+            '> Navigating to Engineering Dossier...',
             '',
-            '  🚄 Team Dromos Website    │ React, TypeScript, GSAP',
-            '  🎬 EntertainmentHub       │ Spring Boot, React, MongoDB',
-            '  ✅ Task Manager           │ Spring Boot, Angular',
-            '  📱 Circle (Mobile)        │ Flutter, Dart',
-            '  ⚖️  Legal Analyzer        │ Python, IBM Watson AI',
-            '  📊 YTscraper              │ Python, JavaScript',
-            '  🎥 Movie App              │ React',
-            '  🔐 Codesigning            │ Backend, Security',
-            '  🌐 Portfolio              │ Next.js, React',
+            '  [ch1] FIFA 2026 Engine       | 20k Monte Carlo, Platt Calibration',
+            '  [ch2] Placement Outreach     | 2-Stage Protocol, Zero Spam',
+            '  [ch3] Hollow Knight RL       | C# BepInEx RAM Hook, 23-D Radar',
+            '  [ch4] Taslasoft & Qcecuring  | 95% Precision NLP, Quorum PKI',
+            '  [ch5] TSlate (Mom Translator)| 100% Offline Whisper+NLLB-200',
+            '  [lab] Team Dromos Hyperloop  | 2nd Place GHC, Low-pass Filter',
             '',
-            'Scrolling to projects section...',
+            'Scrolling to dossier deck...',
         ],
-        navigate: 'projects',
+        navigate: 'dossier-projects',
     },
     skills: {
         output: [
-            '⚡ Technical Skills:',
+            '> Technical Skills & Systems Profile:',
             '',
-            '  Languages    │ Python, Java, JavaScript, C++, C#, SQL',
-            '  Frameworks   │ Spring Boot, React, Angular, Node.js',
-            '  AI/ML        │ TensorFlow, PyTorch, Keras, OpenCV',
-            '  Databases    │ MongoDB, MySQL, PostgreSQL',
-            '  Cloud        │ AWS (EC2, S3, Lambda, SageMaker)',
-            '  Tools        │ Git, Docker, Linux, Unity, Agile',
-            '',
-            'Scrolling to skills section...',
+            '  Languages    | Python, C++, JavaScript, C#, SQL',
+            '  AI & ML      | PyTorch, Scikit-Learn, Transformers, OpenCV, NLP',
+            '  Systems & RL | BepInEx, Unity RAM Hook, Multiprocessing, Linux',
+            '  Databases    | PostgreSQL, MySQL, MongoDB, SQLite',
+            '  Cloud/DevOps | Docker, AWS (EC2, S3, Lambda), Git CI/CD',
         ],
-        navigate: 'skills',
+        navigate: 'pipeline',
     },
     experience: {
         output: [
-            '💼 Experience:',
+            '> Production Engineering Experience:',
             '',
-            '  QCecuring Technologies  │ SWE Intern │ Oct-Dec 2025',
-            '  ACM Club, VIT Chennai   │ Webmaster  │ Sep 2025-Present',
-            '  Team Dromos              │ Engineer   │ Jan 2025-Present',
+            '  Taslasoft       | AIML & SDE Intern | Feb-Sep 2026 | 95% Precision',
+            '  Qcecuring Tech  | SDE Intern        | Oct-Dec 2025 | Quorum PKI (-60% latency)',
+            '  Team Dromos     | Levitation Eng    | GHC 2nd Place Internationally',
             '',
-            'Scrolling to experience section...',
+            'Scrolling to circuit pipeline...',
         ],
-        navigate: 'experience',
+        navigate: 'pipeline',
     },
     contact: {
         output: [
-            '📬 Contact Information:',
+            '> Direct Coordinates & Dispatch:',
             '',
-            '  Email    │ aakarshak.swaraj2023@vitstudent.ac.in',
-            '  LinkedIn │ linkedin.com/in/aakarshak-swaraj',
-            '  GitHub   │ github.com/krishna-kilrofkansa',
+            '  Email    | aakarshak.work@gmail.com (1-Click Copy)',
+            '  LinkedIn | linkedin.com/in/aakarshak-swaraj-a3ba21290',
+            '  GitHub   | github.com/Krishna-Kilrofkansa',
+            '  LeetCode | leetcode.com/u/Aakarshak_Swaraj (300+ Solved, 1508)',
+            '  Location | Chennai (VIT) -> Bengaluru, India',
             '',
             'Scrolling to contact section...',
         ],
@@ -97,13 +100,13 @@ const COMMANDS = {
     },
     resume: {
         output: [
-            '📄 Opening resume download...',
+            '> Opening resume download...',
         ],
         action: 'resume',
     },
     github: {
         output: [
-            '🔗 Opening GitHub profile...',
+            '> Opening GitHub profile...',
         ],
         action: 'github',
     },
@@ -112,12 +115,12 @@ const COMMANDS = {
     },
     sudo: {
         output: [
-            '🚫 Nice try! You don\'t have root access here.',
-            '   But I appreciate the hacker spirit 😎',
+            '> Nice try! You don\'t have root access here.',
+            '  But I appreciate the hacker spirit.',
         ],
     },
     exit: {
-        output: ['👋 Closing terminal... See you around!'],
+        output: ['> Closing terminal... See you around!'],
         action: 'exit',
     },
 };
@@ -126,7 +129,7 @@ export default function InteractiveTerminal() {
     const [isOpen, setIsOpen] = useState(false);
     const [isMinimized, setIsMinimized] = useState(false);
     const [history, setHistory] = useState([
-        { type: 'system', text: 'Welcome to Aakarshak\'s Terminal v1.0.0' },
+        { type: 'system', text: 'Welcome to Aakarshak\'s Terminal v2.0.0' },
         { type: 'system', text: 'Type "help" to see available commands.' },
         { type: 'system', text: '' },
     ]);
@@ -190,7 +193,7 @@ export default function InteractiveTerminal() {
             if (cmdDef.action === 'resume') {
                 setTimeout(() => {
                     const a = document.createElement('a');
-                    a.href = '/Aakarshak-resume.pdf';
+                    a.href = '/Aakarshak aiml.pdf';
                     a.download = true;
                     a.click();
                 }, 500);
@@ -249,19 +252,29 @@ export default function InteractiveTerminal() {
 
     if (!isOpen) {
         return (
-            <button
+            <motion.button
                 className="terminal-fab"
                 onClick={() => setIsOpen(true)}
                 title="Open Terminal"
                 aria-label="Open Terminal"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 2.5, ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{ y: -3, scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
             >
-                <i className="fa-solid fa-terminal"></i>
-            </button>
+                <TerminalIcon />
+            </motion.button>
         );
     }
 
     return (
-        <div className={`terminal-window ${isMinimized ? 'minimized' : ''}`}>
+        <motion.div
+            className={`terminal-window ${isMinimized ? 'minimized' : ''}`}
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+        >
             <div className="terminal-header">
                 <div className="terminal-dots">
                     <span className="dot dot-red" onClick={() => setIsOpen(false)} title="Close"></span>
@@ -305,6 +318,6 @@ export default function InteractiveTerminal() {
                     </form>
                 </div>
             )}
-        </div>
+        </motion.div>
     );
 }
